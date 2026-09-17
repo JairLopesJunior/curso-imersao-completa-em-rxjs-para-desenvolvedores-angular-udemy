@@ -13,7 +13,7 @@ export class ObservablesComponent implements OnInit {
   }
 
   initObservable(): void {
-    const observale = new Observable((subscriber) => {
+    const observable = new Observable((subscriber) => {
       subscriber.next('Jair');
       subscriber.next(123);
       subscriber.next(true);
@@ -21,12 +21,20 @@ export class ObservablesComponent implements OnInit {
       subscriber.complete();
     });
 
-    observale.subscribe(
+    const observer = {
+      next: (x: any) => console.log('Observer next value' + x),
+      error: (err: any) => console.log('Observer error' + err),
+      complete: () => console.log('Observer complete')
+    }
+
+    observable.subscribe(observer);
+
+    /*observale.subscribe(
     (res: any) => {
       console.log(res);
     },
     (error: any) => {
       console.log(error);
-    });
+    });*/
   }
 }
